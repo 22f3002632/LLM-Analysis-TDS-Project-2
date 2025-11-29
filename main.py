@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 START_TIME = time.time()
-@app.get("/healthz")
+@app.get("/run")
 def healthz():
     """Simple liveness check."""
     return {
@@ -59,3 +59,11 @@ async def solve(request: Request, background_tasks: BackgroundTasks):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=7860)
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"message": "LLM Analysis Agent is running!"}
